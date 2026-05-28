@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文山區帶看行程・0529</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy2: #1a3055;
+    --gold: #c8923a;
+    --gold2: #e8b05a;
+    --cream: #f8f4ee;
+    --white: #ffffff;
+    --gray: #6b7c93;
+    --light: #eef2f7;
+    --green: #2e7d52;
+    --tag-bg: #e8f0fb;
+    --tag-fg: #1a4d8a;
+    --shadow: 0 4px 24px rgba(15,31,61,.13);
+    --radius: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--navy);
+    padding: 44px 36px 34px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; left:0; top:0; bottom:0; width:6px;
+    background: linear-gradient(180deg, var(--gold), var(--gold2));
+  }
+  .hero::after {
+    content: '帶看';
+    font-family: 'Noto Serif TC', serif;
+    font-size: 180px; font-weight: 900;
+    color: rgba(255,255,255,.035);
+    position: absolute; right: -10px; top: -20px;
+    line-height: 1; pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-label { font-size: 11px; letter-spacing: 3px; color: var(--gold); font-weight: 500; margin-bottom: 10px; }
+  .hero-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(24px, 4vw, 38px); font-weight: 700; color: var(--white);
+    line-height: 1.3; margin-bottom: 8px;
+  }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,.45); margin-bottom: 26px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+  .hero-chip {
+    background: rgba(200,146,58,.18); border: 1px solid rgba(200,146,58,.35);
+    color: var(--gold2); font-size: 12px; font-weight: 600;
+    padding: 5px 14px; border-radius: 20px;
+  }
+  .hero-card {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,.07); border: 1px solid rgba(200,146,58,.3);
+    border-radius: 10px; padding: 12px 20px;
+  }
+  .hero-card-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .hero-card-name { font-size: 13.5px; font-weight: 700; color: var(--white); }
+  .hero-card-detail { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+  /* ── Stats Bar ── */
+  .stats-bar { background: var(--white); border-bottom: 2px solid var(--light); }
+  .stats-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; padding: 0 24px; }
+  .stat-item {
+    flex: 1; min-width: 110px;
+    padding: 16px 18px; border-right: 1px solid var(--light); text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Noto Serif TC', serif; font-size: 24px; font-weight: 700; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 10.5px; color: var(--gray); margin-top: 4px; letter-spacing: .5px; }
+
+  /* ── Main ── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px; }
+  .section-title {
+    font-family: 'Noto Serif TC', serif; font-size: 19px; font-weight: 700; color: var(--navy);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .section-title::before {
+    content: ''; display: block; width: 4px; height: 22px;
+    background: var(--gold); border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* ── Timeline ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 40px; }
+  .tl-stop { display: flex; gap: 0; position: relative; }
+  .tl-stop:not(:last-child) .tl-left::after {
+    content: '';
+    position: absolute; left: 19px; top: 56px; bottom: -10px;
+    width: 2px;
+    background: repeating-linear-gradient(180deg, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px);
+    z-index: 0;
+  }
+  .tl-left {
+    width: 40px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 14px; position: relative;
+  }
+  .tl-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px;
+    flex-shrink: 0; position: relative; z-index: 1;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  }
+  .tl-dot.origin { background: var(--navy); color: var(--gold); border: 2px solid var(--gold); font-size: 11px; font-weight: 700; }
+  .tl-dot.stop   { background: var(--gold); color: var(--white); }
+  .tl-dot.presale { background: #8b5e1a; color: var(--white); font-size: 11px; }
+
+  .tl-card {
+    flex: 1; background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); margin: 10px 0 10px 20px; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .tl-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(15,31,61,.16); }
+
+  .tl-card-top { display: flex; align-items: stretch; background: var(--navy); min-height: 68px; }
+  .tl-time-block {
+    background: var(--gold); padding: 0 18px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-width: 88px; flex-shrink: 0;
+  }
+  .tl-time-label { font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,.75); font-weight: 600; }
+  .tl-time { font-family: 'Noto Serif TC', serif; font-size: 21px; font-weight: 700; color: var(--white); line-height: 1.1; }
+  .tl-time-pm { font-size: 11px; color: rgba(255,255,255,.8); margin-top: 1px; }
+
+  .tl-card-title-block {
+    flex: 1; padding: 12px 18px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .tl-stop-num { font-size: 10px; letter-spacing: 1.5px; color: rgba(255,255,255,.45); font-weight: 600; margin-bottom: 3px; }
+  .tl-title { font-family: 'Noto Serif TC', serif; font-size: 17px; font-weight: 700; color: var(--white); }
+  .tl-comm { font-size: 11.5px; color: rgba(255,255,255,.5); margin-top: 2px; }
+
+  .tl-price-pill {
+    margin: auto 18px auto 0;
+    display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+    flex-shrink: 0;
+  }
+  .tl-price-num { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--gold2); }
+  .tl-price-unit { font-size: 10px; color: rgba(255,255,255,.4); text-align: right; }
+
+  .tl-card-body { padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 10px 24px; }
+  .tl-info-row { display: flex; align-items: flex-start; gap: 8px; }
+  .tl-info-icon { font-size: 13px; flex-shrink: 0; }
+  .tl-info-label { font-size: 10.5px; color: var(--gray); font-weight: 600; min-width: 36px; }
+  .tl-info-val { font-size: 12.5px; color: var(--navy); font-weight: 500; }
+
+  .tl-card-tags { padding: 0 20px 12px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 10.5px; font-weight: 600; padding: 2px 9px; border-radius: 12px;
+    background: var(--navy); color: var(--white); white-space: nowrap;
+  }
+  .tag.car   { background: #2e4a7c; }
+  .tag.river { background: #1a6a5a; }
+  .tag.new   { background: var(--green); }
+  .tag.presale { background: var(--gold); }
+
+  .tl-card-footer { padding: 10px 20px 14px; border-top: 1px solid var(--light); }
+  .card-btn {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    width: 100%; padding: 9px;
+    background: var(--navy); color: var(--white);
+    text-decoration: none; border-radius: 8px;
+    font-size: 12.5px; font-weight: 600; transition: background .15s;
+  }
+  .card-btn:hover { background: var(--gold); }
+
+  .tl-stop.is-origin .tl-card-top { background: #0a1628; }
+  .tl-stop.is-origin .tl-time-block { background: var(--navy2); }
+  .tl-stop.is-origin .tl-title { font-size: 15px; color: rgba(255,255,255,.8); }
+
+  /* ── Analysis Table ── */
+  .table-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 40px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead { background: var(--navy); }
+  thead th {
+    padding: 13px 14px; text-align: left;
+    font-size: 11px; letter-spacing: 1px;
+    color: rgba(255,255,255,.7); white-space: nowrap; font-weight: 500;
+  }
+  thead th:first-child { padding-left: 20px; }
+  tbody tr { border-bottom: 1px solid var(--light); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f5f8ff; }
+  tbody td { padding: 13px 14px; vertical-align: middle; }
+  tbody td:first-child { padding-left: 20px; }
+
+  .time-badge {
+    background: var(--gold); color: var(--white);
+    font-size: 11.5px; font-weight: 700;
+    padding: 4px 11px; border-radius: 20px; white-space: nowrap;
+  }
+  .case-num {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: var(--navy); color: var(--gold);
+    font-weight: 700; font-size: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .case-name { font-weight: 600; color: var(--navy); font-size: 13.5px; }
+  .case-comm { font-size: 11px; color: var(--gray); margin-top: 2px; }
+  .floor-badge {
+    background: var(--tag-bg); color: var(--tag-fg);
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px; white-space: nowrap; display: inline-block;
+  }
+  .price-cell { font-family: 'Noto Serif TC', serif; font-size: 16px; font-weight: 700; color: var(--gold); white-space: nowrap; }
+  .price-unit { font-size: 10.5px; color: var(--gray); font-weight: 400; font-family: 'Noto Sans TC', sans-serif; }
+  .address-cell { font-size: 11.5px; color: var(--gray); max-width: 190px; }
+  .address-cell a, .tl-info-val a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+    transition: color .15s;
+  }
+  .address-cell a:hover, .tl-info-val a:hover { color: var(--gold); }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 4px; }
+  .btn-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11.5px; font-weight: 600;
+    padding: 5px 12px; border-radius: 6px;
+    background: var(--navy); color: var(--white);
+    text-decoration: none; transition: background .15s; white-space: nowrap;
+  }
+  .btn-link:hover { background: var(--gold); }
+
+  /* ── Map ── */
+  .map-section { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 40px; }
+  .map-header { background: var(--navy); padding: 18px 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .map-header h3 { font-family: 'Noto Serif TC', serif; font-size: 17px; font-weight: 700; color: var(--white); }
+  .map-header p { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 2px; }
+  .map-badge { margin-left: auto; background: var(--gold); color: var(--white); font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; letter-spacing: 1px; }
+  .map-links { padding: 18px 24px; display: flex; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--light); }
+  .map-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 20px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: all .15s; border: none; cursor: pointer;
+  }
+  .map-btn.primary { background: var(--navy); color: var(--white); }
+  .map-btn.primary:hover { background: var(--gold); }
+  .map-btn.secondary { background: var(--light); color: var(--navy); border: 1px solid #d0dae8; }
+  .map-btn.secondary:hover { background: var(--tag-bg); border-color: var(--tag-fg); }
+  .map-indiv { padding: 14px 24px 20px; }
+  .map-indiv-label { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: 1px; margin-bottom: 10px; }
+  .map-indiv-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* ── Footer ── */
+  .footer { background: var(--navy); padding: 30px 36px; text-align: center; }
+  .footer-name { font-family: 'Noto Serif TC', serif; font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .footer-info { font-size: 12px; color: rgba(255,255,255,.45); line-height: 2; }
+  .footer-disc { margin-top: 16px; font-size: 10.5px; color: rgba(255,255,255,.28); max-width: 700px; margin-inline: auto; line-height: 1.7; }
+
+  @media (max-width: 680px) {
+    .hero { padding: 32px 18px 26px; }
+    .main { padding: 20px 12px 48px; }
+    .tl-card-top { flex-wrap: wrap; }
+    .tl-price-pill { display: none; }
+    table { display: block; overflow-x: auto; }
+    .stats-inner { padding: 0 8px; }
+    .stat-item { padding: 12px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">中信房屋 文山木新加盟店・帶看行程表</div>
+    <h1 class="hero-title">文山區精選房源<br>帶看時間 × 路線規劃</h1>
+    <p class="hero-sub">共 5 個精選案件・從木新路 239 號出發</p>
+    <div class="hero-meta">
+      <span class="hero-chip">📅 帶看日期：2026 / 05 / 29（五）</span>
+      <span class="hero-chip">🕛 開始：PM 12:15 首站</span>
+      <span class="hero-chip">🏁 結束預計：PM 2:30</span>
+      <span class="hero-chip">📍 5 個案件</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-avatar">🏡</div>
+      <div>
+        <div class="hero-card-name">中信邦寧 小姐｜您的不動產專業顧問</div>
+        <div class="hero-card-detail">📞 0908-694-988（LINE 同號）｜112年風雲人物・113年傑出經紀人員</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">帶看案件</div></div>
+    <div class="stat-item"><div class="stat-num">2,698</div><div class="stat-label">最低售價（萬）</div></div>
+    <div class="stat-item"><div class="stat-num">3,800</div><div class="stat-label">最高售價（萬）</div></div>
+    <div class="stat-item"><div class="stat-num">2,973</div><div class="stat-label">平均售價（萬）</div></div>
+    <div class="stat-item"><div class="stat-num">12:15</div><div class="stat-label">首站時間</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Timeline -->
+  <div class="section-title">🗓️ 帶看時程・動線規劃</div>
+  <div class="timeline">
+
+    <!-- Origin -->
+    <div class="tl-stop is-origin">
+      <div class="tl-left">
+        <div class="tl-dot origin">出發</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block" style="background:var(--navy2);">
+            <div class="tl-time-label">集合出發</div>
+            <div class="tl-time">12:00</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">START</div>
+            <div class="tl-title">中信房屋 文山木新加盟店</div>
+            <div class="tl-comm"><a href="https://www.google.com/maps/search/台北市文山區木新路三段239號" target="_blank" style="color:rgba(255,255,255,.5);border-bottom:1px dashed rgba(255,255,255,.3);">台北市文山區木新路三段239號</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop 1 -->
+    <div class="tl-stop">
+      <div class="tl-left">
+        <div class="tl-dot stop">1</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block">
+            <div class="tl-time-label">約看時間</div>
+            <div class="tl-time">12:15</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">STOP 01</div>
+            <div class="tl-title">全新河景兩房含車位</div>
+            <div class="tl-comm">明臣勸</div>
+          </div>
+          <div class="tl-price-pill">
+            <div class="tl-price-num">2,698</div>
+            <div class="tl-price-unit">萬元</div>
+          </div>
+        </div>
+        <div class="tl-card-body">
+          <div class="tl-info-row"><span class="tl-info-icon">📐</span><span class="tl-info-label">樓層</span><span class="tl-info-val">5 樓 / 共 12 樓（中樓層）</span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📍</span><span class="tl-info-label">地址</span><span class="tl-info-val"><a href="https://www.google.com/maps/search/台北市文山區指南路一段61號" target="_blank">文山區指南路一段61號5樓</a></span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">🚗</span><span class="tl-info-label">車位</span><span class="tl-info-val">含車位</span></div>
+        </div>
+        <div class="tl-card-tags">
+          <span class="tag river">河景視野</span><span class="tag car">含車位</span><span class="tag new">全新</span><span class="tag">兩房</span>
+        </div>
+        <div class="tl-card-footer">
+          <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2Mjc0MzE3Ng==" target="_blank" class="card-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            查看完整物件資訊
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop 2 -->
+    <div class="tl-stop">
+      <div class="tl-left">
+        <div class="tl-dot stop">2</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block">
+            <div class="tl-time-label">約看時間</div>
+            <div class="tl-time">12:45</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">STOP 02</div>
+            <div class="tl-title">富山匯兩房含車位</div>
+            <div class="tl-comm">宏廷富山匯</div>
+          </div>
+          <div class="tl-price-pill">
+            <div class="tl-price-num">2,780</div>
+            <div class="tl-price-unit">萬元</div>
+          </div>
+        </div>
+        <div class="tl-card-body">
+          <div class="tl-info-row"><span class="tl-info-icon">📐</span><span class="tl-info-label">樓層</span><span class="tl-info-val">8 樓 / 共 15 樓（中高樓層）</span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📍</span><span class="tl-info-label">地址</span><span class="tl-info-val"><a href="https://www.google.com/maps/search/台北市文山區富山路5號" target="_blank">文山區富山路5號8樓</a></span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">🚗</span><span class="tl-info-label">車位</span><span class="tl-info-val">含車位</span></div>
+        </div>
+        <div class="tl-card-tags">
+          <span class="tag">兩房</span><span class="tag car">含車位</span><span class="tag">中高樓</span>
+        </div>
+        <div class="tl-card-footer">
+          <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2MjcxNTc4NQ==" target="_blank" class="card-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            查看完整物件資訊
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop 3 -->
+    <div class="tl-stop">
+      <div class="tl-left">
+        <div class="tl-dot stop">3</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block">
+            <div class="tl-time-label">約看時間</div>
+            <div class="tl-time">1:15</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">STOP 03</div>
+            <div class="tl-title">雙拼露台三房</div>
+            <div class="tl-comm">橡園朋</div>
+          </div>
+          <div class="tl-price-pill">
+            <div class="tl-price-num">2,788</div>
+            <div class="tl-price-unit">萬元</div>
+          </div>
+        </div>
+        <div class="tl-card-body">
+          <div class="tl-info-row"><span class="tl-info-icon">📐</span><span class="tl-info-label">樓層</span><span class="tl-info-val">2 樓 / 共 7 樓</span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📍</span><span class="tl-info-label">地址</span><span class="tl-info-val"><a href="https://www.google.com/maps/search/台北市文山區下崙路11巷13之2號" target="_blank">文山區下崙路11巷13之2號2樓</a></span></div>
+        </div>
+        <div class="tl-card-tags">
+          <span class="tag">三房格局</span><span class="tag">雙拼</span><span class="tag">露台</span><span class="tag">低樓層</span>
+        </div>
+        <div class="tl-card-footer">
+          <a href="https://buy.houseprice.tw/mybshare/320100/32828909/" target="_blank" class="card-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            查看完整物件資訊
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop 4 -->
+    <div class="tl-stop">
+      <div class="tl-left">
+        <div class="tl-dot stop">4</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block">
+            <div class="tl-time-label">約看時間</div>
+            <div class="tl-time">1:30</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">STOP 04</div>
+            <div class="tl-title">政大高樓景觀宅</div>
+            <div class="tl-comm">岳泰峰岳</div>
+          </div>
+          <div class="tl-price-pill">
+            <div class="tl-price-num">3,800</div>
+            <div class="tl-price-unit">萬元（車300）</div>
+          </div>
+        </div>
+        <div class="tl-card-body">
+          <div class="tl-info-row"><span class="tl-info-icon">📐</span><span class="tl-info-label">樓層</span><span class="tl-info-val">8 樓 / 共 9 樓（高樓層）</span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📍</span><span class="tl-info-label">地址</span><span class="tl-info-val"><a href="https://www.google.com/maps/search/台北市文山區新光路一段32巷35號" target="_blank">文山區新光路一段32巷35號8樓</a></span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">🚗</span><span class="tl-info-label">車位</span><span class="tl-info-val">含車位（300萬）</span></div>
+        </div>
+        <div class="tl-card-tags">
+          <span class="tag">高樓景觀</span><span class="tag">鄰近政大</span><span class="tag">三房</span><span class="tag car">含車位</span>
+        </div>
+        <div class="tl-card-footer">
+          <a href="https://sale.591.com.tw/home/house/detail/2/20223879.html?aid=1932" target="_blank" class="card-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            查看完整物件資訊（591）
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stop 5 - Presale -->
+    <div class="tl-stop">
+      <div class="tl-left">
+        <div class="tl-dot presale">預<br>售</div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-card-top">
+          <div class="tl-time-block" style="background:#8b5e1a;">
+            <div class="tl-time-label">約看時間</div>
+            <div class="tl-time">2:00</div>
+            <div class="tl-time-pm">PM</div>
+          </div>
+          <div class="tl-card-title-block">
+            <div class="tl-stop-num">STOP 05・預售屋</div>
+            <div class="tl-title">木柵市中心・綠意久康</div>
+            <div class="tl-comm">綠意久康</div>
+          </div>
+          <div class="tl-price-pill">
+            <div class="tl-price-num">2,800</div>
+            <div class="tl-price-unit">萬元</div>
+          </div>
+        </div>
+        <div class="tl-card-body">
+          <div class="tl-info-row"><span class="tl-info-icon">🏗️</span><span class="tl-info-label">樓層</span><span class="tl-info-val">共 14 樓・56 戶精品社區</span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📍</span><span class="tl-info-label">地址</span><span class="tl-info-val"><a href="https://www.google.com/maps/search/台北市文山區木柵路三段169巷" target="_blank">文山區久康街・木柵路三段169巷</a></span></div>
+          <div class="tl-info-row"><span class="tl-info-icon">📅</span><span class="tl-info-label">完工</span><span class="tl-info-val">預計 2026 年下半年</span></div>
+        </div>
+        <div class="tl-card-tags">
+          <span class="tag presale">預售屋</span><span class="tag">木柵核心</span><span class="tag">56戶社區</span><span class="tag">全新完工</span>
+        </div>
+        <div class="tl-card-footer">
+          <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDEyNTQyNzU5MA==" target="_blank" class="card-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            查看完整物件資訊
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- Analysis Table -->
+  <div class="section-title">📊 房源分析總覽</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>約看時間</th>
+          <th>#</th>
+          <th>案名</th>
+          <th>社區</th>
+          <th>樓層</th>
+          <th>售價（萬）</th>
+          <th>地址</th>
+          <th>特色</th>
+          <th>連結</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="time-badge">PM 12:15</span></td>
+          <td><span class="case-num">1</span></td>
+          <td><div class="case-name">全新河景兩房含車位</div></td>
+          <td><div class="case-comm">明臣勸</div></td>
+          <td><span class="floor-badge">5 / 12 F</span></td>
+          <td><div class="price-cell">2,698<span class="price-unit"> 萬</span></div></td>
+          <td><div class="address-cell"><a href="https://www.google.com/maps/search/台北市文山區指南路一段61號" target="_blank">指南路一段61號5樓</a></div></td>
+          <td><div class="tag-list"><span class="tag river">河景</span><span class="tag car">含車位</span><span class="tag new">全新</span></div></td>
+          <td><a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2Mjc0MzE3Ng==" target="_blank" class="btn-link">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            詳情
+          </a></td>
+        </tr>
+        <tr>
+          <td><span class="time-badge">PM 12:45</span></td>
+          <td><span class="case-num">2</span></td>
+          <td><div class="case-name">富山匯兩房含車位</div></td>
+          <td><div class="case-comm">宏廷富山匯</div></td>
+          <td><span class="floor-badge">8 / 15 F</span></td>
+          <td><div class="price-cell">2,780<span class="price-unit"> 萬</span></div></td>
+          <td><div class="address-cell"><a href="https://www.google.com/maps/search/台北市文山區富山路5號" target="_blank">富山路5號8樓</a></div></td>
+          <td><div class="tag-list"><span class="tag">兩房</span><span class="tag car">含車位</span><span class="tag">中高樓</span></div></td>
+          <td><a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2MjcxNTc4NQ==" target="_blank" class="btn-link">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            詳情
+          </a></td>
+        </tr>
+        <tr>
+          <td><span class="time-badge">PM 1:15</span></td>
+          <td><span class="case-num">3</span></td>
+          <td><div class="case-name">雙拼露台三房</div></td>
+          <td><div class="case-comm">橡園朋</div></td>
+          <td><span class="floor-badge">2 / 7 F</span></td>
+          <td><div class="price-cell">2,788<span class="price-unit"> 萬</span></div></td>
+          <td><div class="address-cell"><a href="https://www.google.com/maps/search/台北市文山區下崙路11巷13之2號" target="_blank">下崙路11巷13之2號2樓</a></div></td>
+          <td><div class="tag-list"><span class="tag">三房</span><span class="tag">露台</span><span class="tag">雙拼</span></div></td>
+          <td><a href="https://buy.houseprice.tw/mybshare/320100/32828909/" target="_blank" class="btn-link">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            詳情
+          </a></td>
+        </tr>
+        <tr>
+          <td><span class="time-badge">PM 1:30</span></td>
+          <td><span class="case-num">4</span></td>
+          <td><div class="case-name">政大高樓景觀宅</div></td>
+          <td><div class="case-comm">岳泰峰岳</div></td>
+          <td><span class="floor-badge">8 / 9 F</span></td>
+          <td><div class="price-cell">3,800<span class="price-unit"> 萬</span></div></td>
+          <td><div class="address-cell"><a href="https://www.google.com/maps/search/台北市文山區新光路一段32巷35號" target="_blank">新光路一段32巷35號8樓</a></div></td>
+          <td><div class="tag-list"><span class="tag">高樓景觀</span><span class="tag">三房</span><span class="tag car">含車位</span></div></td>
+          <td><a href="https://sale.591.com.tw/home/house/detail/2/20223879.html?aid=1932" target="_blank" class="btn-link">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            詳情(591)
+          </a></td>
+        </tr>
+        <tr>
+          <td><span class="time-badge" style="background:#8b5e1a;">PM 2:00</span></td>
+          <td><span class="case-num">5</span></td>
+          <td><div class="case-name">木柵市中心・綠意久康</div></td>
+          <td><div class="case-comm">綠意久康</div></td>
+          <td><span class="floor-badge">共 14 F</span></td>
+          <td><div class="price-cell">2,800<span class="price-unit"> 萬</span></div></td>
+          <td><div class="address-cell"><a href="https://www.google.com/maps/search/台北市文山區木柵路三段169巷" target="_blank">久康街・木柵路三段169巷</a></div></td>
+          <td><div class="tag-list"><span class="tag presale">預售屋</span><span class="tag">56戶</span></div></td>
+          <td><a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDEyNTQyNzU5MA==" target="_blank" class="btn-link">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            詳情
+          </a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Google Maps -->
+  <div class="section-title">🗺️ Google Maps 路線導航</div>
+  <div class="map-section">
+    <div class="map-header">
+      <div>
+        <h3>完整帶看路線・一鍵導航</h3>
+        <p>木新路239號 → 指南路 → 富山路 → 下崙路 → 新光路 → 木柵路（依約看時間排序）</p>
+      </div>
+      <div class="map-badge">5 站・約 2 小時</div>
+    </div>
+    <div class="map-links">
+      <a class="map-btn primary"
+        href="https://www.google.com/maps/dir/台北市文山區木新路三段239號/台北市文山區指南路一段61號/台北市文山區富山路5號/台北市文山區下崙路11巷13之2號/台北市文山區新光路一段32巷35號/台北市文山區木柵路三段169巷"
+        target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Google Maps 完整路線（6 站）
+      </a>
+      <a class="map-btn secondary"
+        href="https://maps.apple.com/?saddr=台北市文山區木新路三段239號&daddr=台北市文山區指南路一段61號&dirflg=d"
+        target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Apple Maps 導航
+      </a>
+    </div>
+    <div class="map-indiv">
+      <div class="map-indiv-label">各物件單獨定位</div>
+      <div class="map-indiv-row">
+        <a href="https://www.google.com/maps/search/台北市文山區木新路三段239號" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">🏢 出發點・木新路239號</a>
+        <a href="https://www.google.com/maps/search/台北市文山區指南路一段61號" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">📍 案1・指南路（12:15）</a>
+        <a href="https://www.google.com/maps/search/台北市文山區富山路5號" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">📍 案2・富山路（12:45）</a>
+        <a href="https://www.google.com/maps/search/台北市文山區下崙路11巷13之2號" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">📍 案3・下崙路（13:15）</a>
+        <a href="https://www.google.com/maps/search/台北市文山區新光路一段32巷35號" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">📍 案4・新光路（13:30）</a>
+        <a href="https://www.google.com/maps/search/台北市文山區木柵路三段169巷" target="_blank" class="map-btn secondary" style="font-size:12px;padding:7px 14px;">📍 案5・木柵路（14:00）</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:var(--navy);border-radius:var(--radius);padding:26px 28px;text-align:center;">
+    <div style="font-family:'Noto Serif TC',serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:6px;">📋 立即預約看房 0908 694 988</div>
+    <div style="font-size:12.5px;color:rgba(255,255,255,.45);margin-bottom:16px;">邦寧親自帶看，為您找到最適合的家</div>
+    <div style="font-size:14px;font-weight:700;color:var(--gold2);">📞 0908-694-988（LINE 同號）</div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-name">買屋賣屋找邦寧 一定幫您完成滿意的交易 🤝</div>
+  <div class="footer-info">
+    🏡 中信邦寧 小姐｜您的不動產專業顧問<br>
+    🏆 112年風雲人物・113年傑出經紀人員<br>
+    營業員證號：（111）登字第 422760 號<br>
+    📞 0908-694-988（LINE 同號）<br>
+    📍 中信房屋 文山木新加盟店 木新路三段 239 號（富華不動產開發有限公司）<br>
+    經紀人：黃新發（99）北縣字第 002010 號
+  </div>
+  <div class="footer-disc">＊本廣告內容資料以地政機關登記為準，若廣告內容有打錯或漏填純屬人為疏忽（手誤），並非故意行騙或詐騙。</div>
+</div>
+
+</body>
+</html>
