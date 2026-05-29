@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>已看案源紀錄・木柵政大生活圈</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #16120e;
+  --deep:   #1c1410;
+  --brown:  #3a2a1a;
+  --gold:   #c8922a;
+  --gold2:  #e8b24a;
+  --gold3:  #f5d080;
+  --sand:   #f4ede0;
+  --sand2:  #e8dcc8;
+  --warm:   #faf7f2;
+  --white:  #ffffff;
+  --gray:   #7a6e5e;
+  --lgray:  #c0b4a0;
+  --green:  #2a5c3a;
+  --red:    #b83020;
+  --viewed: #e8f2e8;
+  --viewed2:#2a5c3a;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--warm);color:var(--ink);overflow-x:hidden;}
+
+/* ─── HEADER ─── */
+.header{
+  background:var(--deep);
+  padding:40px 48px 32px;
+  position:relative;overflow:hidden;
+}
+.header::before{
+  content:'VIEWED';
+  font-family:'DM Serif Display',serif;
+  font-size:160px;font-weight:400;
+  color:rgba(255,255,255,.03);
+  position:absolute;right:-20px;top:-10px;
+  line-height:1;pointer-events:none;letter-spacing:-4px;
+}
+.header-inner{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+.header-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,146,42,.15);
+  border:1px solid rgba(200,146,42,.4);
+  color:var(--gold2);
+  font-size:10px;letter-spacing:3px;font-weight:600;
+  padding:5px 14px;border-radius:2px;
+  margin-bottom:16px;
+}
+.header-badge::before{content:'✓';font-size:12px;}
+.header-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(28px,4vw,48px);
+  color:var(--white);line-height:1.2;
+  margin-bottom:8px;
+}
+.header-title em{font-style:italic;color:var(--gold2);}
+.header-sub{
+  font-size:13px;color:rgba(255,255,255,.4);
+  letter-spacing:1px;margin-bottom:28px;
+}
+.header-meta{
+  display:flex;flex-wrap:wrap;gap:24px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.header-meta-item{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;}
+.header-meta-item strong{color:var(--gold3);display:block;font-size:22px;font-family:'DM Serif Display',serif;font-weight:400;line-height:1.1;}
+
+/* ─── MAIN ─── */
+.main{max-width:960px;margin:0 auto;padding:48px 48px 80px;}
+
+/* ─── SECTION LABEL ─── */
+.sec-label{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+}
+.sec-line{width:32px;height:1px;background:var(--gold);}
+.sec-text{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:600;}
+
+/* ─── CASE CARD ─── */
+.case-card{
+  background:var(--white);
+  border:1px solid var(--sand2);
+  margin-bottom:28px;
+  position:relative;
+  overflow:hidden;
+  transition:box-shadow .2s;
+}
+.case-card:hover{box-shadow:0 8px 40px rgba(60,40,20,.10);}
+
+/* viewed stamp */
+.viewed-stamp{
+  position:absolute;top:20px;right:20px;
+  background:var(--viewed);
+  color:var(--viewed2);
+  font-size:9px;font-weight:700;letter-spacing:2px;
+  padding:4px 12px;border-radius:2px;
+  border:1px solid rgba(42,92,58,.25);
+  z-index:2;
+}
+
+.case-top{
+  display:flex;align-items:stretch;
+  min-height:140px;
+}
+
+/* number panel */
+.case-num-panel{
+  width:72px;flex-shrink:0;
+  background:var(--deep);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;
+  position:relative;overflow:hidden;
+}
+.case-num-panel::after{
+  content:attr(data-num);
+  font-family:'DM Serif Display',serif;
+  font-size:80px;color:rgba(255,255,255,.04);
+  position:absolute;bottom:-10px;left:-10px;line-height:1;
+}
+.case-num-label{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+.case-num-val{
+  font-family:'DM Serif Display',serif;
+  font-size:28px;font-weight:400;color:var(--gold2);
+  line-height:1;
+}
+
+/* main info */
+.case-info{
+  flex:1;padding:20px 24px;
+  border-right:1px solid var(--sand2);
+}
+.case-community{
+  font-size:10px;letter-spacing:2px;color:var(--lgray);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.case-name{
+  font-family:'Noto Serif TC',serif;
+  font-size:20px;font-weight:700;color:var(--deep);
+  margin-bottom:4px;line-height:1.3;
+}
+.case-type{font-size:12px;color:var(--gray);margin-bottom:14px;letter-spacing:1px;}
+.case-specs{
+  display:flex;flex-wrap:wrap;gap:0;
+  border:1px solid var(--sand2);
+  display:inline-flex;
+}
+.spec-chip{
+  padding:5px 14px;
+  font-size:11px;color:var(--gray);
+  border-right:1px solid var(--sand2);
+}
+.spec-chip:last-child{border-right:none;}
+.spec-chip strong{display:block;font-size:13px;font-weight:700;color:var(--deep);}
+
+/* price panel */
+.case-price-panel{
+  width:140px;flex-shrink:0;
+  background:var(--sand);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px;
+  gap:2px;
+}
+.price-label{font-size:9px;letter-spacing:2px;color:var(--lgray);text-transform:uppercase;margin-bottom:6px;}
+.price-num{
+  font-family:'DM Serif Display',serif;
+  font-size:34px;font-weight:400;color:var(--gold);
+  line-height:1;
+}
+.price-unit{font-size:11px;color:var(--gray);margin-top:3px;}
+
+/* address bar */
+.case-addr{
+  padding:12px 24px;
+  background:var(--warm);
+  border-top:1px solid var(--sand2);
+  display:flex;align-items:center;gap:10px;
+  font-size:12px;color:var(--gray);
+}
+.case-addr svg{flex-shrink:0;opacity:.5;}
+.case-addr a{color:var(--gray);text-decoration:none;border-bottom:1px dashed var(--lgray);transition:color .15s;}
+.case-addr a:hover{color:var(--gold);}
+
+/* footer buttons */
+.case-footer{
+  padding:14px 24px;
+  border-top:1px solid var(--sand2);
+  display:flex;gap:8px;flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11.5px;font-weight:700;letter-spacing:.5px;
+  padding:8px 18px;text-decoration:none;
+  transition:all .15s;cursor:pointer;border:none;
+  font-family:'Noto Sans TC',sans-serif;
+}
+.btn-primary{background:var(--deep);color:var(--white);}
+.btn-primary:hover{background:var(--gold);}
+.btn-yt{background:#cc0000;color:var(--white);}
+.btn-yt:hover{background:#e00;}
+.btn-outline{background:transparent;color:var(--deep);border:1px solid var(--sand2);}
+.btn-outline:hover{background:var(--sand);border-color:var(--gold);}
+
+/* presale ribbon */
+.presale-tag{
+  display:inline-block;
+  background:var(--gold);color:var(--white);
+  font-size:9px;font-weight:700;letter-spacing:2px;
+  padding:3px 10px;margin-bottom:10px;
+}
+
+/* ─── SUMMARY TABLE ─── */
+.summary-section{margin-top:52px;}
+.summary-table-wrap{
+  background:var(--white);
+  border:1px solid var(--sand2);
+  overflow:auto;
+}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+thead{background:var(--deep);}
+thead th{
+  padding:12px 16px;text-align:left;
+  font-size:10px;letter-spacing:2px;
+  color:rgba(255,255,255,.5);font-weight:500;
+  white-space:nowrap;
+}
+tbody tr{border-bottom:1px solid var(--sand2);transition:background .12s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:var(--sand);}
+tbody td{padding:13px 16px;vertical-align:middle;}
+.td-num{
+  font-family:'DM Serif Display',serif;
+  font-size:18px;color:var(--gold);font-weight:400;
+}
+.td-comm{font-family:'Noto Serif TC',serif;font-size:13px;font-weight:700;color:var(--deep);}
+.td-sub{font-size:10px;color:var(--lgray);margin-top:2px;}
+.td-price{
+  font-family:'DM Serif Display',serif;
+  font-size:18px;color:var(--gold);
+}
+.td-price small{font-size:11px;color:var(--gray);font-family:'Noto Sans TC',sans-serif;}
+.td-floor{
+  background:var(--sand);
+  font-size:11px;font-weight:600;color:var(--deep);
+  padding:3px 10px;display:inline-block;
+}
+.td-viewed{
+  background:var(--viewed);color:var(--viewed2);
+  font-size:9px;font-weight:700;letter-spacing:1px;
+  padding:3px 10px;display:inline-block;
+  border:1px solid rgba(42,92,58,.2);
+}
+.td-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10.5px;font-weight:700;
+  padding:5px 12px;text-decoration:none;
+  background:var(--deep);color:var(--white);
+  transition:background .12s;white-space:nowrap;
+}
+.td-btn:hover{background:var(--gold);}
+.td-btn.yt{background:#cc0000;margin-left:5px;}
+.td-btn.yt:hover{background:#e00;}
+
+/* ─── NOTES AREA ─── */
+.notes-section{margin-top:52px;}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.note-card{
+  background:var(--white);
+  border:1px solid var(--sand2);
+  padding:20px;
+}
+.note-card-label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--lgray);margin-bottom:10px;
+}
+.note-card-comm{
+  font-family:'Noto Serif TC',serif;
+  font-size:15px;font-weight:700;color:var(--deep);
+  margin-bottom:12px;
+  padding-bottom:10px;border-bottom:1px solid var(--sand2);
+}
+.note-lines{display:flex;flex-direction:column;gap:6px;}
+.note-line{
+  height:1px;background:var(--sand2);
+  position:relative;
+}
+.note-line::after{
+  content:'';position:absolute;
+  left:0;top:0;width:0;height:1px;
+  background:var(--sand2);
+}
+
+/* ─── FOOTER ─── */
+.footer{
+  background:var(--deep);
+  padding:28px 48px;
+  text-align:center;
+}
+.footer-name{
+  font-family:'Noto Serif TC',serif;
+  font-size:13px;letter-spacing:3px;color:var(--gold2);
+  margin-bottom:8px;
+}
+.footer-info{font-size:10px;color:rgba(255,255,255,.25);line-height:2;}
+.footer-disc{font-size:9.5px;color:rgba(255,255,255,.15);margin-top:10px;max-width:700px;margin-inline:auto;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:720px){
+  .header,.main{padding-left:20px;padding-right:20px;}
+  .case-top{flex-direction:column;}
+  .case-num-panel{width:100%;height:52px;flex-direction:row;gap:8px;}
+  .case-price-panel{width:100%;flex-direction:row;gap:10px;}
+  .notes-grid{grid-template-columns:1fr;}
+}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-d1{transition-delay:.1s;}
+.reveal-d2{transition-delay:.2s;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">已帶看案源紀錄</div>
+    <div class="header-title">木柵・政大生活圈<br><em>帶看紀錄</em></div>
+    <div class="header-sub">MUZHA · ZHENGDA LIVING CIRCLE ／ VIEWED PROPERTIES</div>
+    <div class="header-meta">
+      <div class="header-meta-item"><strong>3</strong>帶看案件</div>
+      <div class="header-meta-item"><strong>2,698<small style="font-size:14px">萬</small></strong>最低入手價</div>
+      <div class="header-meta-item"><strong>文山區</strong>核心地段</div>
+      <div class="header-meta-item"><strong>2</strong>含影片介紹</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="sec-label">
+    <div class="sec-line"></div>
+    <div class="sec-text">Viewed Properties</div>
+  </div>
+
+  <!-- ══ CASE 01: 綠意久康 ══ -->
+  <div class="case-card reveal">
+    <div class="viewed-stamp">✓ 已帶看</div>
+    <div class="case-top">
+      <div class="case-num-panel" data-num="01">
+        <div class="case-num-label">CASE</div>
+        <div class="case-num-val">01</div>
+      </div>
+      <div class="case-info">
+        <div class="case-community">社區・綠意久康</div>
+        <div class="presale-tag">預售屋</div>
+        <div class="case-name">木柵市中心・綠意久康</div>
+        <div class="case-type">預售・精品社區｜2026 年下半年完工</div>
+        <div class="case-specs">
+          <div class="spec-chip"><strong>2,800 萬</strong>售價</div>
+          <div class="spec-chip"><strong>共 14 樓</strong>樓高</div>
+          <div class="spec-chip"><strong>56 戶</strong>總戶數</div>
+          <div class="spec-chip"><strong>預售屋</strong>屋況</div>
+        </div>
+      </div>
+      <div class="case-price-panel">
+        <div class="price-label">ASKING PRICE</div>
+        <div class="price-num">2,800</div>
+        <div class="price-unit">萬元</div>
+      </div>
+    </div>
+    <div class="case-addr">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      台北市文山區久康街・木柵路三段169巷
+      <a href="https://www.google.com/maps/search/台北市文山區久康街116號" target="_blank" style="margin-left:8px;">Google Maps →</a>
+    </div>
+    <div class="case-footer">
+      <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDEyNTQyNzU5MA==" target="_blank" class="btn btn-primary">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        中信物件詳情
+      </a>
+      <a href="https://youtu.be/TpjUIB0c3z8?si=dXt3XD3kF3GpsLkR" target="_blank" class="btn btn-yt">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+        觀看影片介紹
+      </a>
+      <a href="https://www.google.com/maps/search/台北市文山區久康街116號" target="_blank" class="btn btn-outline">📍 地圖定位</a>
+    </div>
+  </div>
+
+  <!-- ══ CASE 02: 明臣勸 ══ -->
+  <div class="case-card reveal reveal-d1">
+    <div class="viewed-stamp">✓ 已帶看</div>
+    <div class="case-top">
+      <div class="case-num-panel" data-num="02">
+        <div class="case-num-label">CASE</div>
+        <div class="case-num-val">02</div>
+      </div>
+      <div class="case-info">
+        <div class="case-community">社區・明臣勸</div>
+        <div class="case-name">全新河景兩房含車位</div>
+        <div class="case-type">景美溪畔・中樓層河景｜全新裝潢</div>
+        <div class="case-specs">
+          <div class="spec-chip"><strong>2,698 萬</strong>售價</div>
+          <div class="spec-chip"><strong>5 / 12 樓</strong>樓層</div>
+          <div class="spec-chip"><strong>兩房＋車</strong>格局</div>
+          <div class="spec-chip"><strong>全新裝潢</strong>屋況</div>
+        </div>
+      </div>
+      <div class="case-price-panel">
+        <div class="price-label">ASKING PRICE</div>
+        <div class="price-num">2,698</div>
+        <div class="price-unit">萬元</div>
+      </div>
+    </div>
+    <div class="case-addr">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      台北市文山區指南路一段61號5樓
+      <a href="https://www.google.com/maps/search/台北市文山區指南路一段61號" target="_blank" style="margin-left:8px;">Google Maps →</a>
+    </div>
+    <div class="case-footer">
+      <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2Mjc0MzE3Ng==" target="_blank" class="btn btn-primary">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        中信物件詳情
+      </a>
+      <a href="https://www.google.com/maps/search/台北市文山區指南路一段61號" target="_blank" class="btn btn-outline">📍 地圖定位</a>
+    </div>
+  </div>
+
+  <!-- ══ CASE 03: 岳泰峰岳 ══ -->
+  <div class="case-card reveal reveal-d2">
+    <div class="viewed-stamp">✓ 已帶看</div>
+    <div class="case-top">
+      <div class="case-num-panel" data-num="03">
+        <div class="case-num-label">CASE</div>
+        <div class="case-num-val">03</div>
+      </div>
+      <div class="case-info">
+        <div class="case-community">社區・岳泰峰岳</div>
+        <div class="case-name">政大高樓景觀三房</div>
+        <div class="case-type">政大生活圈・高樓層景觀宅</div>
+        <div class="case-specs">
+          <div class="spec-chip"><strong>3,800 萬</strong>售價</div>
+          <div class="spec-chip"><strong>8 / 9 樓</strong>樓層</div>
+          <div class="spec-chip"><strong>三房</strong>格局</div>
+          <div class="spec-chip"><strong>高樓景觀</strong>特色</div>
+        </div>
+      </div>
+      <div class="case-price-panel">
+        <div class="price-label">ASKING PRICE</div>
+        <div class="price-num">3,800</div>
+        <div class="price-unit">萬元</div>
+      </div>
+    </div>
+    <div class="case-addr">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8922a" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      台北市文山區新光路一段32巷35號8樓
+      <a href="https://www.google.com/maps/search/台北市文山區新光路一段32巷35號" target="_blank" style="margin-left:8px;">Google Maps →</a>
+    </div>
+    <div class="case-footer">
+      <a href="https://www.facebook.com/share/p/17Z973TxCR/?mibextid=wwXIf" target="_blank" class="btn btn-primary">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Facebook 物件詳情
+      </a>
+      <a href="https://youtu.be/drv9yOm9zIc?si=s4O9pVP1CPEuacyE" target="_blank" class="btn btn-yt">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+        觀看影片介紹
+      </a>
+      <a href="https://www.google.com/maps/search/台北市文山區新光路一段32巷35號" target="_blank" class="btn btn-outline">📍 地圖定位</a>
+    </div>
+  </div>
+
+  <!-- ══ SUMMARY TABLE ══ -->
+  <div class="summary-section reveal">
+    <div class="sec-label" style="margin-bottom:20px;">
+      <div class="sec-line"></div>
+      <div class="sec-text">Quick Comparison</div>
+    </div>
+    <div class="summary-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>社區</th>
+            <th>案名</th>
+            <th>樓層</th>
+            <th>售價</th>
+            <th>地址</th>
+            <th>狀態</th>
+            <th>連結</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="td-num">01</div></td>
+            <td><div class="td-comm">綠意久康<div class="td-sub">預售屋</div></div></td>
+            <td>木柵市中心・預售</td>
+            <td><span class="td-floor">共 14F</span></td>
+            <td><div class="td-price">2,800<small> 萬</small></div></td>
+            <td style="font-size:11.5px;color:var(--gray);">久康街・木柵路三段169巷</td>
+            <td><span class="td-viewed">✓ 已帶看</span></td>
+            <td>
+              <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDEyNTQyNzU5MA==" target="_blank" class="td-btn">詳情</a>
+              <a href="https://youtu.be/TpjUIB0c3z8?si=dXt3XD3kF3GpsLkR" target="_blank" class="td-btn yt">▶</a>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="td-num">02</div></td>
+            <td><div class="td-comm">明臣勸<div class="td-sub">全新河景</div></div></td>
+            <td>全新河景兩房含車位</td>
+            <td><span class="td-floor">中樓層 / 12F</span></td>
+            <td><div class="td-price">2,698<small> 萬</small></div></td>
+            <td style="font-size:11.5px;color:var(--gray);">指南路一段61號5樓</td>
+            <td><span class="td-viewed">✓ 已帶看</span></td>
+            <td>
+              <a href="https://ab.cthousing.com.tw/EDM/ObjectDetail/NjI5NjMyMDI2MDUyNDE2Mjc0MzE3Ng==" target="_blank" class="td-btn">詳情</a>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="td-num">03</div></td>
+            <td><div class="td-comm">岳泰峰岳<div class="td-sub">景觀高樓</div></div></td>
+            <td>政大高樓景觀三房</td>
+            <td><span class="td-floor">高樓層 / 9F</span></td>
+            <td><div class="td-price">3,800<small> 萬</small></div></td>
+            <td style="font-size:11.5px;color:var(--gray);">新光路一段32巷35號8樓</td>
+            <td><span class="td-viewed">✓ 已帶看</span></td>
+            <td>
+              <a href="https://www.facebook.com/share/p/17Z973TxCR/?mibextid=wwXIf" target="_blank" class="td-btn">詳情</a>
+              <a href="https://youtu.be/drv9yOm9zIc?si=s4O9pVP1CPEuacyE" target="_blank" class="td-btn yt">▶</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ NOTES ══ -->
+  <div class="notes-section reveal reveal-d1">
+    <div class="sec-label" style="margin-bottom:20px;">
+      <div class="sec-line"></div>
+      <div class="sec-text">看屋筆記</div>
+    </div>
+    <div class="notes-grid">
+      <div class="note-card">
+        <div class="note-card-label">CASE 01 NOTES</div>
+        <div class="note-card-comm">綠意久康</div>
+        <div class="note-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+      <div class="note-card">
+        <div class="note-card-label">CASE 02 NOTES</div>
+        <div class="note-card-comm">明臣勸</div>
+        <div class="note-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+      <div class="note-card">
+        <div class="note-card-label">CASE 03 NOTES</div>
+        <div class="note-card-comm">岳泰峰岳</div>
+        <div class="note-lines">
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+          <div class="note-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-name">中信邦寧 小姐｜您的不動產專業顧問</div>
+  <div class="footer-info">
+    📞 0908-694-988（LINE 同號）｜中信房屋 文山木新加盟店・木新路三段239號<br>
+    富華不動產開發有限公司｜經紀人：黃新發（99）北縣字第 002010 號｜營業員：（111）登字第 422760 號
+  </div>
+  <div class="footer-disc">＊本廣告內容資料以地政機關登記為準，若廣告內容有打錯或漏填純屬人為疏忽（手誤），並非故意行騙或詐騙。</div>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
